@@ -1,0 +1,8 @@
+venv
+*.pyc
+.DS_Store
+.env
+
+
+/Churn_Modelling.csv
+/model_train.py
