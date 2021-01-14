@@ -30,6 +30,7 @@ model = joblib.load('model_14012021.pkl')
 # Load Scaler
 scaler = joblib.load('scaler_14012021.pkl')
 
+
 def main():
 
     # Aplication header
