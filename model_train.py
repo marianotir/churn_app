@@ -108,7 +108,8 @@ X_train, X_test, Y_train, Y_test = train_test_split(X, target_encoded_le, test_s
 # Scale data 
 from sklearn import preprocessing
 mm_scaler = preprocessing.MinMaxScaler()
-X_train = mm_scaler.fit_transform(X_train)
+mm_scaler.fit(X_train)
+X_train = mm_scaler.transform(X_train)
 X_test = mm_scaler.transform(X_test)
 
 
@@ -143,16 +144,27 @@ print('recall_score =',recall_score(Y_test, pred))
 # Save model
 #-----------------------
 import pickle
-pkl_filename = "C:/Users/Mariano/DS_Models/St_Chrun/model_rf_12012021.pkl"
-with open(pkl_filename, 'wb') as file:
-    pickle.dump(model_rf, file)
+# save model
+pkl_model = "C:/Users/Mariano/DS_Models/St_Chrun/model_14012021.pkl"
+pickle.dump(model_rf, open(pkl_model, 'wb'))
+    
+# save the scaler
+pkl_scaler = "C:/Users/Mariano/DS_Models/St_Chrun/scaler_14012021.pkl"
+pickle.dump(mm_scaler, open(pkl_scaler, 'wb'))
 
-df.describe
+
 #--------------------------
 # Load the model
 #--------------------------
 import joblib
-model = joblib.load(pkl_filename)
+
+# Load model
+pkl_model = "C:/Users/Mariano/DS_Models/St_Chrun/model_14012021.pkl"
+model = joblib.load(pkl_model)
+
+# Load scaler
+pkl_scaler = "C:/Users/Mariano/DS_Models/St_Chrun/scaler_14012021.pkl"
+scaler = joblib.load(pkl_scaler)
 
 # Generate predictions 
 Age = 25
@@ -166,6 +178,8 @@ data = {'Age': Age,
 # Data for prediction output
 df = pd.DataFrame(data,index=[0])
 X_outsample = df.values
+
+X_outsample = scaler.transform(X_outsample)
     
 pred = model.predict(X_outsample)
 pred

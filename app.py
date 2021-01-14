@@ -13,9 +13,6 @@ Created on Wed Jan  6 13:40:40 2021
 import streamlit as st
 import joblib
 
-# Model libraries
-from sklearn.ensemble import RandomForestClassifier
-
 # Dataframe manipulation libraries
 import pandas as pd
 
@@ -24,7 +21,10 @@ import pandas as pd
 #-------------------------------
 
 # Load model 
-model = joblib.load('model_rf_12012021.pkl')
+model = joblib.load('model_14012021.pkl')
+
+# Load Scaler
+scaler = joblib.load('scaler_14012021.pkl')
 
 def main():
 
@@ -53,6 +53,8 @@ def main():
     
     # Generate predictions on unseen data
     X_outsample = df.values
+    
+    X_outsample = scaler.transform(X_outsample)
     
     predictions = model.predict(X_outsample)
     
