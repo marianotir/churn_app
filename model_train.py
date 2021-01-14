@@ -106,7 +106,6 @@ from sklearn.model_selection import train_test_split
 X_train, X_test, Y_train, Y_test = train_test_split(X, target_encoded_le, test_size=0.2)
 
 # Scale data 
-from sklearn import preprocessing
 mm_scaler = preprocessing.MinMaxScaler()
 mm_scaler.fit(X_train)
 X_train = mm_scaler.transform(X_train)
