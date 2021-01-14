@@ -56,9 +56,15 @@ le = preprocessing.LabelEncoder()
 le_fit = le.fit(Y)
 target_encoded_le = le_fit.transform(Y)
 
+
 # Split train and test dataset 
 from sklearn.model_selection import train_test_split
 X_train, X_test, Y_train, Y_test = train_test_split(X, target_encoded_le, test_size=0.2)
+
+# Scale data 
+from sklearn import preprocessing
+mm_scaler = preprocessing.MinMaxScaler()
+X_train = mm_scaler.fit_transform(X_train)
 
 # Simple model for fetaure selection
 from sklearn.tree import DecisionTreeClassifier
@@ -99,15 +105,11 @@ target_encoded_le = le_fit.transform(Y)
 from sklearn.model_selection import train_test_split
 X_train, X_test, Y_train, Y_test = train_test_split(X, target_encoded_le, test_size=0.2)
 
-
-#-----------------------------
-# Umbalance Solving
-#-----------------------------
-
-# Applky Synthetic Minority Oversampling Technique
-from imblearn.over_sampling import SMOTE
-sm = SMOTE(random_state=27)
-X_train, Y_train = sm.fit_sample(X_train, Y_train)
+# Scale data 
+from sklearn import preprocessing
+mm_scaler = preprocessing.MinMaxScaler()
+X_train = mm_scaler.fit_transform(X_train)
+X_test = mm_scaler.transform(X_test)
 
 
 #----------------------------
