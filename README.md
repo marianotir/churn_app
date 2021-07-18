@@ -1,3 +1,2 @@
-"# credict_clasifier" 
-"# hr_helper" 
-"# churn_app" 
+
+Simple streamlit app for churn analysis
